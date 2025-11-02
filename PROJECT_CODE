@@ -1,0 +1,278 @@
+CREATE DATABASE RealEstate_management_DB;
+USE RealEstate_management_DB;
+
+-- TABLE: Agents
+
+CREATE TABLE Agents (
+    agent_id INT AUTO_INCREMENT PRIMARY KEY,
+    agent_name VARCHAR(100),
+    phone VARCHAR(15),
+    email VARCHAR(100),
+    commission_rate DECIMAL(5,2)
+);
+
+
+-- TABLE: Clients
+
+CREATE TABLE Clients (
+    client_id INT AUTO_INCREMENT PRIMARY KEY,
+    client_name VARCHAR(100),
+    phone VARCHAR(15),
+    email VARCHAR(100)
+);
+
+
+-- TABLE: Properties
+
+CREATE TABLE Properties (
+    property_id INT AUTO_INCREMENT PRIMARY KEY,
+    address VARCHAR(255),
+    city VARCHAR(100),
+    price DECIMAL(12,2),
+    status enum('Available', 'Sold') DEFAULT 'Available',
+    agent_id INT,
+    FOREIGN KEY (agent_id) REFERENCES Agents(agent_id)
+);
+
+
+-- TABLE: Transactions
+
+CREATE TABLE Transactions (
+    transaction_id INT AUTO_INCREMENT PRIMARY KEY,
+    property_id INT,
+    client_id INT,
+    agent_id INT,
+    sale_price DECIMAL(12,2),
+    transaction_date DATE,
+    commission_earned DECIMAL(12,2),
+    FOREIGN KEY (property_id) REFERENCES Properties(property_id),
+    FOREIGN KEY (client_id) REFERENCES Clients(client_id),
+    FOREIGN KEY (agent_id) REFERENCES Agents(agent_id)
+);
+
+-- insert 
+INSERT INTO Agents (agent_name, phone, email, commission_rate) VALUES
+('Amit Sharma', '9876543210', 'amit@realestate.com', 2.5),
+('Priya Nair', '9123456789', 'priya@realestate.com', 3.0),
+('Ravi Kumar', '9998887776', 'ravi@realestate.com', 2.0),
+('Neha Patel', '9898989898', 'neha@realestate.com', 2.5),
+('Suresh Reddy', '9988776655', 'suresh@realestate.com', 3.5),
+('Kavita Mehta', '9876123456', 'kavita@realestate.com', 2.0),
+('Rahul Verma', '9012345678', 'rahul@realestate.com', 3.0),
+('Divya Joshi', '9001122334', 'divya@realestate.com', 2.5),
+('Vikas Singh', '8998877665', 'vikas@realestate.com', 2.0),
+('Manoj Pillai', '7778899001', 'manoj@realestate.com', 3.0),
+('Sneha Desai', '7558899221', 'sneha@realestate.com', 2.5),
+('Rajeev Sinha', '7345678901', 'rajeev@realestate.com', 2.0),
+('Komal Gupta', '7890456123', 'komal@realestate.com', 2.5),
+('Deepak Rao', '7998899001', 'deepak@realestate.com', 3.0),
+('Lakshmi Menon', '9007654321', 'lakshmi@realestate.com', 3.5);
+
+
+INSERT INTO Clients (client_name, phone, email) VALUES
+('Arjun Singh','9000011111','arjun@gmail.com'),
+('Meera Sharma','9000011112','meera@gmail.com'),
+('Kiran Patel','9000011113','kiran@gmail.com'),
+('Anjali Rao','9000011114','anjali@gmail.com'),
+('Vivek Nair','9000011115','vivek@gmail.com'),
+('Rohit Das','9000011116','rohit@gmail.com'),
+('Preeti Mehta','9000011117','preeti@gmail.com'),
+('Tanya Joshi','9000011118','tanya@gmail.com'),
+('Ajay Verma','9000011119','ajay@gmail.com'),
+('Sneha Reddy','9000011120','sneha@gmail.com'),
+('Pooja Sinha','9000011121','pooja@gmail.com'),
+('Deepa Gupta','9000011122','deepa@gmail.com'),
+('Manish Kumar','9000011123','manish@gmail.com'),
+('Sonal Desai','9000011124','sonal@gmail.com'),
+('Harish Pillai','9000011125','harish@gmail.com'),
+('Ritu Menon','9000011126','ritu@gmail.com'),
+('Sanjay Rao','9000011127','sanjay@gmail.com'),
+('Rekha Patel','9000011128','rekha@gmail.com'),
+('Nikhil Sharma','9000011129','nikhil@gmail.com'),
+('Priya Singh','9000011130','priya@gmail.com'),
+('Vijay Kumar','9000011131','vijay@gmail.com'),
+('Tina Nair','9000011132','tina@gmail.com'),
+('Aditya Mehta','9000011133','aditya@gmail.com'),
+('Bhavna Joshi','9000011134','bhavna@gmail.com'),
+('Rajesh Verma','9000011135','rajesh@gmail.com'),
+('Neeta Desai','9000011136','neeta@gmail.com'),
+('Tarun Sinha','9000011137','tarun@gmail.com'),
+('Lata Gupta','9000011138','lata@gmail.com'),
+('Ramesh Rao','9000011139','ramesh@gmail.com'),
+('Anita Patel','9000011140','anita@gmail.com'),
+('Sunil Sharma','9000011141','sunil@gmail.com'),
+('Divya Singh','9000011142','divya@gmail.com'),
+('Karthik Nair','9000011143','karthik@gmail.com'),
+('Meenakshi Mehta','9000011144','meenakshi@gmail.com'),
+('Ravi Joshi','9000011145','ravi@gmail.com'),
+('Alok Verma','9000011146','alok@gmail.com'),
+('Chitra Reddy','9000011147','chitra@gmail.com'),
+('Mohit Sinha','9000011148','mohit@gmail.com'),
+('Shalini Gupta','9000011149','shalini@gmail.com'),
+('Pavan Rao','9000011150','pavan@gmail.com'),
+('Isha Patel','9000011151','isha@gmail.com'),
+('Nisha Sharma','9000011152','nisha@gmail.com'),
+('Venu Menon','9000011153','venu@gmail.com'),
+('Rohini Das','9000011154','rohini@gmail.com'),
+('Kabir Nair','9000011155','kabir@gmail.com'),
+('Anusha Singh','9000011156','anusha@gmail.com');
+
+
+INSERT INTO Properties (address, city, price, status, agent_id) VALUES
+('12 MG Road', 'Bangalore', 8500000, 'Available', 1),
+('45 Park Street', 'Kolkata', 6500000, 'Available', 2),
+('78 Nehru Nagar', 'Delhi', 12000000, 'Sold', 3),
+('23 Anna Salai', 'Chennai', 9500000, 'Available', 4),
+('56 FC Road', 'Pune', 7200000, 'Sold', 5),
+('89 Marine Drive', 'Mumbai', 25000000, 'Available', 6),
+('34 Banjara Hills', 'Hyderabad', 18000000, 'Sold', 7),
+('67 Sector 15', 'Gurgaon', 9500000, 'Available', 8),
+('90 Salt Lake', 'Kolkata', 8000000, 'Sold', 9),
+('15 Residency Road', 'Bangalore', 9800000, 'Available', 10),
+('22 Koramangala', 'Bangalore', 8700000, 'Available', 11),
+('18 Jubilee Hills', 'Hyderabad', 14500000, 'Available', 12),
+('34 Cuffe Parade', 'Mumbai', 25000000, 'Sold', 13),
+('27 Civil Lines', 'Delhi', 11000000, 'Available', 14),
+('19 Boat Club Road', 'Pune', 9800000, 'Available', 15),
+('78 Ameerpet', 'Hyderabad', 7200000, 'Available', 1),
+('66 BTM Layout', 'Bangalore', 8600000, 'Available', 2),
+('12 Defence Colony', 'Delhi', 15000000, 'Sold', 3),
+('77 Koregaon Park', 'Pune', 9200000, 'Available', 4),
+('54 Bandra West', 'Mumbai', 18000000, 'Available', 5),
+('90 Gachibowli', 'Hyderabad', 12800000, 'Available', 6),
+('41 Indiranagar', 'Bangalore', 8900000, 'Sold', 7),
+('23 Powai', 'Mumbai', 19000000, 'Available', 8),
+('45 Khar West', 'Mumbai', 21000000, 'Available', 9),
+('16 Connaught Place', 'Delhi', 16000000, 'Sold', 10),
+('38 HSR Layout', 'Bangalore', 9400000, 'Available', 11),
+('52 Baner', 'Pune', 8700000, 'Available', 12),
+('77 Madhapur', 'Hyderabad', 10000000, 'Sold', 13),
+('11 Alwarpet', 'Chennai', 9700000, 'Available', 14),
+('33 T Nagar', 'Chennai', 8900000, 'Available', 15),
+('88 Anna Nagar', 'Chennai', 9500000, 'Available', 1),
+('12 Ballygunge', 'Kolkata', 8300000, 'Sold', 2),
+('56 Salt Lake', 'Kolkata', 9100000, 'Available', 3),
+('73 Banjara Hills', 'Hyderabad', 14500000, 'Sold', 4),
+('22 Koramangala', 'Bangalore', 8800000, 'Available', 5),
+('11 Sholinganallur', 'Chennai', 7600000, 'Available', 6),
+('44 Whitefield', 'Bangalore', 10500000, 'Available', 7),
+('17 Hinjewadi', 'Pune', 8200000, 'Sold', 8),
+('56 Malviya Nagar', 'Delhi', 9400000, 'Available', 9),
+('99 Gariahat', 'Kolkata', 6800000, 'Available', 10),
+('23 Borivali', 'Mumbai', 12000000, 'Sold', 11),
+('18 Andheri East', 'Mumbai', 11500000, 'Available', 12),
+('12 Kalyan Nagar', 'Bangalore', 8700000, 'Available', 13),
+('27 Kukatpally', 'Hyderabad', 7500000, 'Available', 14),
+('78 JP Nagar', 'Bangalore', 9100000, 'Sold', 15),
+('88 Thane', 'Mumbai', 15000000, 'Available', 1),
+('23 Erandwane', 'Pune', 9500000, 'Available', 2),
+('44 Vile Parle', 'Mumbai', 16500000, 'Sold', 3),
+('32 Malad West', 'Mumbai', 14200000, 'Available', 4),
+('21 Rajarhat', 'Kolkata', 7200000, 'Available', 5),
+('17 Kondapur', 'Hyderabad', 8500000, 'Available', 6),
+('99 Anna Salai', 'Chennai', 9800000, 'Sold', 7),
+('66 Velachery', 'Chennai', 8200000, 'Available', 8),
+('45 Bellandur', 'Bangalore', 9700000, 'Available', 9),
+('19 Wakad', 'Pune', 8900000, 'Available', 10),
+('24 Goregaon East', 'Mumbai', 13700000, 'Sold', 11),
+('38 Behala', 'Kolkata', 7500000, 'Available', 12),
+('28 DLF Phase 1', 'Gurgaon', 12500000, 'Sold', 13),
+('42 Vasant Kunj', 'Delhi', 16500000, 'Available', 14),
+('77 Koramangala', 'Bangalore', 10500000, 'Available', 15),
+('88 Koregaon Park', 'Pune', 9400000, 'Available', 1),
+('12 Madhapur', 'Hyderabad', 9700000, 'Available', 2),
+('22 Nungambakkam', 'Chennai', 9900000, 'Sold', 3),
+('99 Thiruvanmiyur', 'Chennai', 8900000, 'Available', 4),
+('67 Banjara Hills', 'Hyderabad', 14800000, 'Available', 5);
+
+
+INSERT INTO Transactions (property_id, client_id, agent_id, sale_price, transaction_date, commission_earned) VALUES
+(3, 1, 3, 12000000, '2024-01-10', 240000),
+(5, 2, 5, 7200000, '2024-02-14', 252000),
+(7, 3, 7, 18000000, '2024-03-05', 540000),
+(9, 4, 9, 8000000, '2024-04-01', 160000),
+(15, 5, 10, 9500000, '2024-05-12', 285000),
+(12, 6, 4, 10000000, '2024-06-20', 250000),
+(8, 7, 8, 9600000, '2024-07-05', 240000),
+(10, 8, 10, 9800000, '2024-08-15', 294000),
+(14, 9, 2, 7500000, '2024-09-11', 225000),
+(11, 10, 6, 11000000, '2024-10-10', 220000),
+(12, 11, 4, 10000000, '2024-01-15', 250000),
+(14, 12, 5, 9000000, '2024-02-11', 315000),
+(18, 13, 7, 10000000, '2024-02-21', 250000),
+(22, 14, 8, 8300000, '2024-03-10', 207500),
+(24, 15, 9, 14500000, '2024-04-04', 290000),
+(27, 16, 10, 8200000, '2024-05-16', 246000),
+(28, 17, 12, 7200000, '2024-06-02', 144000),
+(31, 18, 11, 12000000, '2024-07-12', 300000),
+(33, 19, 13, 8700000, '2024-08-09', 217500),
+(36, 20, 15, 9100000, '2024-09-23', 318500),
+(38, 21, 3, 16500000, '2024-10-10', 330000),
+(41, 22, 6, 8500000, '2024-11-01', 170000),
+(43, 23, 7, 9800000, '2024-11-15', 245000),
+(45, 24, 8, 9700000, '2024-12-20', 242500),
+(47, 25, 9, 13700000, '2024-12-29', 274000),
+(49, 26, 10, 12500000, '2025-01-05', 375000),
+(51, 27, 11, 9400000, '2025-01-11', 188000),
+(53, 28, 13, 9900000, '2025-02-01', 247500),
+(55, 29, 2, 14800000, '2025-02-20', 444000),
+(57, 30, 1, 15000000, '2025-03-05', 375000);
+
+
+-- view(JOIN)
+CREATE VIEW view_property_sales AS
+SELECT 
+    p.property_id,
+    p.address,
+    p.city,
+    a.agent_name,
+    c.client_name,
+    t.sale_price,
+    t.transaction_date,
+    t.commission_earned
+FROM Transactions t
+JOIN Properties p ON t.property_id = p.property_id
+JOIN Agents a ON t.agent_id = a.agent_id
+JOIN Clients c ON t.client_id = c.client_id;
+
+SELECT * FROM view_property_sales;
+
+
+-- JOINS (List of sold properties with agent and client details)
+SELECT 
+    p.address, p.city, a.agent_name, c.client_name, t.sale_price
+FROM Properties p
+JOIN Transactions t ON p.property_id = t.property_id
+JOIN Agents a ON a.agent_id = t.agent_id
+JOIN Clients c ON c.client_id = t.client_id;
+
+
+-- Fetch properties that cost more than the average property price(SUBQUERY)
+
+SELECT * FROM Properties
+WHERE price > (SELECT AVG(price) FROM Properties);
+
+
+-- STORED PROCEDURE
+
+DELIMITER $$
+CREATE PROCEDURE CountPropertiesByCity()
+BEGIN
+    SELECT city, COUNT(*) AS total_properties
+    FROM Properties
+    GROUP BY city;
+END$$
+DELIMITER ;
+
+-- TRIGGER
+
+DELIMITER $$
+CREATE TRIGGER trg_after_transaction_insert
+AFTER INSERT ON Transactions
+FOR EACH ROW
+BEGIN
+    UPDATE Properties
+    SET status = 'Sold'
+    WHERE property_id = NEW.property_id;
+END$$
+DELIMITER ;
