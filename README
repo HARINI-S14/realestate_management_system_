@@ -1,0 +1,43 @@
+*### Real Estate Management System (MySQL Project)*
+
+The Real Estate Management System is a MySQL-based database project designed to efficiently manage properties, agents, clients, and sales transactions.
+It demonstrates advanced SQL concepts including joins, views, triggers, subqueries, and stored procedures for real-world database management.
+
+ Features
+
+1) Manage property listings with details like location, price, and availability.
+
+2) Track agents and their commission rates.
+
+3) Store client information and contact details.
+
+4) Record sales transactions with automatic status updates.
+
+5) Use stored procedures to generate quick insights and statistics.
+
+ Implement triggers for real-time updates (e.g., marking properties as “Sold” after a transaction).
+
+ Utilize views and subqueries for simplified reporting and analytics.
+
+Database Schema
+
+Tables Created:
+
+Agents – Stores agent details and commission rates.
+
+Clients – Stores buyer and customer information.
+
+Properties – Contains property details, prices, and agent assignments.
+
+Transactions – Records all sales transactions and earned commissions.
+
+Each property is linked to an agent.
+
+Each transaction connects a property, client, and agent.
+
+Tools & Technologies
+
+Database: MySQL
+Language: SQL
+Platform: MySQL Workbench
+Version Control: Git & GitHub
